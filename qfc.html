@@ -1,0 +1,475 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QFC Chips Company Ltd. — Crunchy. Tasty. Delicious.</title>
+    <meta name="description" content="QFC Chips Company Ltd. Premium Nigerian ripe plantain chips. Crunchy, Tasty, Delicious. Order via WhatsApp.">
+    <style>
+        :root {
+            --qfc-red: #c41e3a;
+            --qfc-red-dark: #9b1830;
+            --qfc-red-light: #e63950;
+            --qfc-gold: #d4a017;
+            --qfc-gold-light: #f0c040;
+            --qfc-green: #1a8c3a;
+            --qfc-green-dark: #146b2e;
+            --qfc-dark: #1a1a1a;
+            --qfc-gray-900: #212121;
+            --qfc-gray-800: #333333;
+            --qfc-gray-700: #4a4a4a;
+            --qfc-gray-600: #666666;
+            --qfc-gray-500: #888888;
+            --qfc-gray-400: #aaaaaa;
+            --qfc-gray-300: #cccccc;
+            --qfc-gray-200: #e0e0e0;
+            --qfc-gray-100: #f5f5f5;
+            --qfc-white: #ffffff;
+            --qfc-cream: #fdf8f0;
+            --radius: 12px;
+            --radius-lg: 20px;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
+            --shadow-xl: 0 20px 60px rgba(0,0,0,0.15);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--qfc-gray-800); line-height: 1.6;
+            background: var(--qfc-white); overflow-x: hidden;
+        }
+        img { max-width: 100%; height: auto; display: block; }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+
+        /* NAVIGATION */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: rgba(255,255,255,0.97); backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            padding: 0 2rem; height: 70px;
+            display: flex; align-items: center; justify-content: space-between;
+            transition: var(--transition);
+        }
+        .navbar.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); height: 60px; }
+        .nav-brand { display: flex; align-items: center; gap: 0.75rem; }
+        .nav-brand h1 { font-size: 1.5rem; font-weight: 800; color: var(--qfc-red); letter-spacing: -0.5px; }
+        .nav-brand h1 span { color: var(--qfc-gold); }
+        .nav-links { display: flex; align-items: center; gap: 0.25rem; list-style: none; }
+        .nav-links a { padding: 0.5rem 0.9rem; border-radius: 8px; font-weight: 500; font-size: 0.9rem; color: var(--qfc-gray-700); }
+        .nav-links a:hover { color: var(--qfc-red); background: rgba(196,30,58,0.05); }
+        .nav-cta { background: var(--qfc-green); color: white !important; padding: 0.6rem 1.2rem !important; border-radius: 8px !important; font-weight: 600 !important; }
+        .nav-cta:hover { background: var(--qfc-green-dark) !important; transform: translateY(-1px); }
+        .mobile-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--qfc-gray-800); padding: 0.5rem; }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center;
+            background: linear-gradient(135deg, var(--qfc-cream) 0%, #fff5e6 50%, var(--qfc-white) 100%);
+            padding: 5rem 2rem 3rem; position: relative; overflow: hidden;
+        }
+        .hero::before { content: ''; position: absolute; top: -20%; right: -10%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(196,30,58,0.06) 0%, transparent 70%); border-radius: 50%; }
+        .hero::after { content: ''; position: absolute; bottom: -20%; left: -5%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(212,160,23,0.08) 0%, transparent 70%); border-radius: 50%; }
+        .hero-container { max-width: 1200px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 1; }
+        .hero-text h2 { font-size: 3.5rem; font-weight: 800; color: var(--qfc-red); line-height: 1.1; margin-bottom: 0.5rem; letter-spacing: -1px; }
+        .hero-text .slogan { font-size: 1.1rem; color: var(--qfc-gold); font-weight: 600; margin-bottom: 1rem; letter-spacing: 2px; text-transform: uppercase; }
+        .hero-text p { font-size: 1.25rem; color: var(--qfc-gray-600); margin-bottom: 2rem; max-width: 500px; }
+        .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .hero-image { display: flex; justify-content: center; align-items: center; }
+        .hero-image img { max-height: 500px; width: auto; border-radius: var(--radius-lg); box-shadow: var(--shadow-xl); transition: var(--transition); }
+        .hero-image img:hover { transform: scale(1.03) rotate(1deg); }
+
+        /* BUTTONS */
+        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; border-radius: var(--radius); font-weight: 700; font-size: 1rem; cursor: pointer; border: none; transition: var(--transition); text-transform: uppercase; letter-spacing: 0.5px; }
+        .btn-red { background: var(--qfc-red); color: white; box-shadow: 0 4px 15px rgba(196,30,58,0.3); }
+        .btn-red:hover { background: var(--qfc-red-dark); transform: translateY(-2px); box-shadow: 0 6px 25px rgba(196,30,58,0.4); }
+        .btn-green { background: var(--qfc-green); color: white; box-shadow: 0 4px 15px rgba(26,140,58,0.3); }
+        .btn-green:hover { background: var(--qfc-green-dark); transform: translateY(-2px); }
+        .btn-outline { background: transparent; color: var(--qfc-red); border: 2px solid var(--qfc-red); }
+        .btn-outline:hover { background: var(--qfc-red); color: white; transform: translateY(-2px); }
+        .btn-whatsapp { background: #25D366; color: white; box-shadow: 0 4px 15px rgba(37,211,102,0.3); }
+        .btn-whatsapp:hover { background: #1da851; transform: translateY(-2px); box-shadow: 0 6px 25px rgba(37,211,102,0.4); }
+
+        /* SECTIONS */
+        .section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 3rem; }
+        .section-header h2 { font-size: 2.2rem; font-weight: 700; color: var(--qfc-gray-900); margin-bottom: 0.5rem; }
+        .section-header p { color: var(--qfc-gray-500); font-size: 1.05rem; }
+        .section-header .accent-line { width: 60px; height: 4px; background: var(--qfc-red); margin: 1rem auto 0; border-radius: 2px; }
+
+        /* PRODUCTS */
+        .products-section { background: var(--qfc-gray-100); padding: 5rem 2rem; }
+        .products-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 2.5rem; }
+        .product-card { background: var(--qfc-white); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow); transition: var(--transition); position: relative; }
+        .product-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-xl); }
+        .product-card .badge { position: absolute; top: 1rem; left: 1rem; background: var(--qfc-red); color: white; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; z-index: 2; }
+        .product-image { width: 100%; height: 320px; overflow: hidden; background: var(--qfc-cream); display: flex; align-items: center; justify-content: center; padding: 1rem; }
+        .product-image img { max-height: 100%; width: auto; object-fit: contain; transition: var(--transition); }
+        .product-card:hover .product-image img { transform: scale(1.05); }
+        .product-info { padding: 1.5rem 1.75rem 2rem; }
+        .product-info h3 { font-size: 1.3rem; font-weight: 700; color: var(--qfc-gray-900); margin-bottom: 0.25rem; }
+        .product-info .product-type { color: var(--qfc-gray-500); font-size: 0.9rem; margin-bottom: 0.75rem; }
+        .product-info .product-desc { color: var(--qfc-gray-600); font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.5; }
+        .product-price { font-size: 1.8rem; font-weight: 800; color: var(--qfc-red); margin-bottom: 1.25rem; }
+        .product-buttons { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+        .product-buttons .btn { flex: 1; min-width: 140px; justify-content: center; padding: 0.8rem 1rem; font-size: 0.85rem; }
+
+        /* PRICES */
+        .prices-section { padding: 5rem 2rem; background: var(--qfc-white); }
+        .price-table { max-width: 700px; margin: 0 auto; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow); }
+        .price-row { display: grid; grid-template-columns: 1fr auto auto; align-items: center; padding: 1.25rem 1.75rem; border-bottom: 1px solid var(--qfc-gray-200); transition: var(--transition); }
+        .price-row:hover { background: var(--qfc-cream); }
+        .price-row:last-child { border-bottom: none; }
+        .price-row.header { background: var(--qfc-red); color: white; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .price-row.header:hover { background: var(--qfc-red); }
+        .price-row .pr-name { font-weight: 600; color: var(--qfc-gray-900); }
+        .price-row .pr-size { color: var(--qfc-gray-500); font-size: 0.9rem; text-align: center; padding: 0 1.5rem; }
+        .price-row .pr-price { font-weight: 700; color: var(--qfc-red); font-size: 1.1rem; text-align: right; }
+
+        /* GALLERY */
+        .gallery-section { padding: 5rem 2rem; background: var(--qfc-gray-100); }
+        .gallery-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .gallery-item { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow); transition: var(--transition); cursor: pointer; aspect-ratio: 4/3; }
+        .gallery-item:hover { transform: scale(1.03); box-shadow: var(--shadow-xl); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* ABOUT */
+        .about-section { background: linear-gradient(135deg, var(--qfc-red) 0%, var(--qfc-red-dark) 100%); padding: 5rem 2rem; color: white; text-align: center; }
+        .about-section h2 { color: white; font-size: 2.2rem; margin-bottom: 1rem; }
+        .about-section > p { max-width: 700px; margin: 0 auto 1.5rem; font-size: 1.1rem; opacity: 0.9; line-height: 1.7; }
+        .about-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; max-width: 800px; margin: 2.5rem auto 0; }
+        .about-feature { text-align: center; }
+        .about-feature .icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+        .about-feature h4 { font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .about-feature p { font-size: 0.85rem; opacity: 0.8; }
+
+        /* CONTACT */
+        .contact-section { padding: 5rem 2rem; background: var(--qfc-white); }
+        .contact-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+        .contact-card { background: var(--qfc-gray-100); border-radius: var(--radius-lg); padding: 2.5rem; box-shadow: var(--shadow); }
+        .contact-card h3 { font-size: 1.4rem; font-weight: 700; color: var(--qfc-gray-900); margin-bottom: 1.5rem; }
+        .contact-item { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.25rem; }
+        .contact-item .ci-icon { width: 40px; height: 40px; border-radius: 50%; background: rgba(196,30,58,0.08); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+        .contact-item .ci-text h4 { font-size: 0.8rem; color: var(--qfc-gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.2rem; }
+        .contact-item .ci-text p { font-size: 1rem; color: var(--qfc-gray-800); font-weight: 500; }
+        .contact-buttons { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
+        .contact-buttons .btn { flex: 1; min-width: 150px; justify-content: center; }
+
+        /* FOOTER */
+        .footer { background: var(--qfc-dark); padding: 3rem 2rem 1.5rem; color: var(--qfc-gray-400); }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; }
+        .footer-brand h3 { font-size: 1.4rem; font-weight: 700; color: var(--qfc-white); margin-bottom: 0.5rem; }
+        .footer-brand h3 span { color: var(--qfc-gold); }
+        .footer-brand p { font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem; }
+        .footer-col h4 { color: var(--qfc-white); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; }
+        .footer-col a { display: block; color: var(--qfc-gray-400); font-size: 0.9rem; margin-bottom: 0.5rem; }
+        .footer-col a:hover { color: var(--qfc-gold); }
+        .footer-bottom { max-width: 1200px; margin: 2rem auto 0; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; font-size: 0.85rem; }
+
+        /* ANIMATIONS */
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* RESPONSIVE */
+        @media (max-width: 968px) {
+            .hero-container { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
+            .hero-text h2 { font-size: 2.5rem; }
+            .hero-text p { margin: 0 auto 2rem; }
+            .hero-buttons { justify-content: center; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr; gap: 2rem; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; position: fixed; top: 70px; left: 0; right: 0; background: white; flex-direction: column; padding: 1rem; box-shadow: var(--shadow-lg); border-top: 1px solid var(--qfc-gray-200); }
+            .nav-links.active { display: flex; }
+            .nav-links a { padding: 0.75rem 1rem; width: 100%; }
+            .mobile-toggle { display: block; }
+            .hero { padding: 5rem 1.5rem 3rem; min-height: auto; }
+            .hero-text h2 { font-size: 2rem; }
+            .hero-image img { max-height: 350px; }
+            .products-grid { grid-template-columns: 1fr; }
+            .product-buttons { flex-direction: column; }
+            .product-buttons .btn { min-width: auto; }
+            .section, .products-section, .prices-section, .gallery-section, .contact-section { padding: 3rem 1.5rem; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .price-row { grid-template-columns: 1fr; gap: 0.5rem; padding: 1rem 1.25rem; }
+            .price-row .pr-size, .price-row .pr-price { text-align: left; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-brand">
+            <h1>QFC <span>CHIPS</span></h1>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#prices">Prices</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#location">Location</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="https://wa.me/2348034232544?text=Hello%20QFC%20Chips%2C%20I%20would%20like%20to%20order%20QFC%20Ripe%20Chips.%20Please%20provide%20more%20information%20about%20availability%20and%20delivery." class="nav-cta" target="_blank">🛒 Order Now</a></li>
+        </ul>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-text">
+                <div class="slogan">Crunchy. Tasty. Delicious.</div>
+                <h2>QFC CHIPS</h2>
+                <p>Delicious Crunch in Every Bite! Premium quality ripe plantain chips made with love in Lagos, Nigeria.</p>
+                <div class="hero-buttons">
+                    <a href="#products" class="btn btn-red">🛒 Shop Now</a>
+                    <a href="#contact" class="btn btn-outline">📞 Contact QFC</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="WIN_20260709_14_32_45_Pro.jpg" alt="QFC Ripe Chips Jar - Premium Plantain Chips">
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section class="products-section" id="products">
+        <div class="section-header">
+            <h2>Our Products</h2>
+            <p>Premium ripe plantain chips — available in jar and sachet</p>
+            <div class="accent-line"></div>
+        </div>
+        <div class="products-grid">
+            <!-- Product 1: Jar -->
+            <div class="product-card fade-in">
+                <span class="badge">Popular</span>
+                <div class="product-image">
+                    <img src="WIN_20260709_14_32_45_Pro.jpg" alt="QFC Ripe Chips Jar">
+                </div>
+                <div class="product-info">
+                    <h3>QFC Ripe Chips</h3>
+                    <div class="product-type">Jar — Family Size</div>
+                    <p class="product-desc">Premium ripe plantain chips in a convenient resealable jar. Perfect for sharing with family and friends. Crunchy, golden, and irresistibly delicious.</p>
+                    <div class="product-price">₦5,500</div>
+                    <div class="product-buttons">
+                        <a href="https://wa.me/2348034232544?text=Hello%20QFC%20Chips%2C%20I%20would%20like%20to%20order%20QFC%20Ripe%20Chips%20(Jar%20-%20%E2%82%A65%2C500).%20Please%20provide%20more%20information%20about%20availability%20and%20delivery." class="btn btn-red" target="_blank">🛒 Order Now</a>
+                        <a href="https://wa.me/2348034232544?text=Hello%20QFC%20Chips%2C%20I%20would%20like%20to%20order%20QFC%20Ripe%20Chips.%20Please%20provide%20more%20information%20about%20availability%20and%20delivery." class="btn btn-whatsapp" target="_blank">💬 WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 2: Sachet -->
+            <div class="product-card fade-in">
+                <span class="badge" style="background: var(--qfc-green);">Snack Size</span>
+                <div class="product-image">
+                    <img src="WIN_20260817_15_41_11_Pro.jpg" alt="QFC Ripe Chips Sachet">
+                </div>
+                <div class="product-info">
+                    <h3>QFC Ripe Chips</h3>
+                    <div class="product-type">Sachet — Snack Size</div>
+                    <p class="product-desc">Perfectly portioned ripe plantain chips in a convenient sachet. Ideal for on-the-go snacking. Grab one for yourself or stock up for the week.</p>
+                    <div class="product-price">₦500</div>
+                    <div class="product-buttons">
+                        <a href="https://wa.me/2348034232544?text=Hello%20QFC%20Chips%2C%20I%20would%20like%20to%20order%20QFC%20Ripe%20Chips%20(Sachet%20-%20%E2%82%A6500).%20Please%20provide%20more%20information%20about%20availability%20and%20delivery." class="btn btn-red" target="_blank">🛒 Order Now</a>
+                        <a href="https://wa.me/2348034232544?text=Hello%20QFC%20Chips%2C%20I%20would%20like%20to%20order%20QFC%20Ripe%20Chips.%20Please%20provide%20more%20information%20about%20availability%20and%20delivery." class="btn btn-whatsapp" target="_blank">💬 WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICES -->
+    <section class="prices-section" id="prices">
+        <div class="section-header">
+            <h2>Our Prices</h2>
+            <p>Affordable quality — premium taste at great value</p>
+            <div class="accent-line"></div>
+        </div>
+        <div class="price-table">
+            <div class="price-row header">
+                <span>Product</span>
+                <span>Size</span>
+                <span>Price</span>
+            </div>
+            <div class="price-row">
+                <span class="pr-name">QFC Ripe Chips</span>
+                <span class="pr-size">Jar</span>
+                <span class="pr-price">₦5,500</span>
+            </div>
+            <div class="price-row">
+                <span class="pr-name">QFC Ripe Chips</span>
+                <span class="pr-size">Sachet</span>
+                <span class="pr-price">₦500</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="gallery-section" id="gallery">
+        <div class="section-header">
+            <h2>Product Gallery</h2>
+            <p>See our delicious ripe plantain chips up close</p>
+            <div class="accent-line"></div>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item fade-in">
+                <img src="WIN_20260709_14_32_45_Pro.jpg" alt="QFC Ripe Chips Jars">
+            </div>
+            <div class="gallery-item fade-in">
+                <img src="WIN_20260817_15_41_11_Pro.jpg" alt="QFC Ripe Chips Sachet">
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about-section" id="about">
+        <h2>About QFC Chips</h2>
+        <p>QFC Chips Company Ltd. produces premium quality ripe plantain chips right here in Lagos, Nigeria. Our chips are made from carefully selected ripe plantains, fried to golden perfection for that satisfying crunch in every bite.</p>
+        <div class="about-features">
+            <div class="about-feature">
+                <div class="icon">🍌</div>
+                <h4>Premium Plantains</h4>
+                <p>Made from quality ripe plantains</p>
+            </div>
+            <div class="about-feature">
+                <div class="icon">✨</div>
+                <h4>Crunchy &amp; Fresh</h4>
+                <p>Golden, crispy perfection</p>
+            </div>
+            <div class="about-feature">
+                <div class="icon">📦</div>
+                <h4>Well Packaged</h4>
+                <p>Jar and sachet options available</p>
+            </div>
+            <div class="about-feature">
+                <div class="icon">🚚</div>
+                <h4>Easy Ordering</h4>
+                <p>Order via WhatsApp for delivery</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- LOCATION & CONTACT -->
+    <section class="contact-section" id="location">
+        <div class="section-header">
+            <h2>Get In Touch</h2>
+            <p>Visit us or place your order via WhatsApp</p>
+            <div class="accent-line"></div>
+        </div>
+        <div class="contact-grid" id="contact">
+            <div class="contact-card fade-in">
+                <h3>📍 Our Location</h3>
+                <div class="contact-item">
+                    <div class="ci-icon">🏢</div>
+                    <div class="ci-text">
+                        <h4>Company</h4>
+                        <p>QFC Chips Company Ltd.</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="ci-icon">📍</div>
+                    <div class="ci-text">
+                        <h4>Address</h4>
+                        <p>LSPDC Housing Estate Phase 2,<br>Adeniji Adele Road,<br>Lagos Island, Lagos, Nigeria.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-card fade-in">
+                <h3>📞 Contact Us</h3>
+                <div class="contact-item">
+                    <div class="ci-icon">📱</div>
+                    <div class="ci-text">
+                        <h4>Phone / WhatsApp</h4>
+                        <p>08034232544</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="ci-icon">⏰</div>
+                    <div class="ci-text">
+                        <h4>Ordering</h4>
+                        <p>Order anytime via WhatsApp</p>
+                    </div>
+                </div>
+                <div class="contact-buttons">
+                    <a href="tel:08034232544" class="btn btn-red">📞 Call Now</a>
+                    <a href="https://wa.me/2348034232544?text=Hello%20QFC%20Chips%2C%20I%20would%20like%20to%20order%20QFC%20Ripe%20Chips.%20Please%20provide%20more%20information%20about%20availability%20and%20delivery." class="btn btn-whatsapp" target="_blank">💬 WhatsApp Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>QFC <span>CHIPS</span></h3>
+                <p>Crunchy. Tasty. Delicious.<br>Premium ripe plantain chips made in Lagos, Nigeria.</p>
+                <a href="https://wa.me/2348034232544?text=Hello%20QFC%20Chips%2C%20I%20would%20like%20to%20order%20QFC%20Ripe%20Chips.%20Please%20provide%20more%20information%20about%20availability%20and%20delivery." class="btn btn-whatsapp" target="_blank" style="padding: 0.6rem 1.2rem; font-size: 0.85rem;">💬 Order on WhatsApp</a>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="#home">Home</a>
+                <a href="#products">Products</a>
+                <a href="#prices">Prices</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#about">About</a>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <a href="tel:08034232544">📞 08034232544</a>
+                <a href="https://wa.me/2348034232544" target="_blank">💬 WhatsApp</a>
+                <a href="#location">📍 Lagos Island</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 QFC Chips Company Ltd. All rights reserved. | Lagos, Nigeria</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Mobile menu toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navLinks = document.getElementById('navLinks');
+        mobileToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            this.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+        });
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileToggle.textContent = '☰';
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Scroll animations
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        fadeElements.forEach(el => observer.observe(el));
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>
